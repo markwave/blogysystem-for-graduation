@@ -23,3 +23,7 @@ class blogv1(models.Model):
 	blog_type=models.ForeignKey(BlogType,on_delete=models.DO_NOTHING,default=1)
 	def __str__(self):
 		return "Article:%s" % self.title
+
+	class Meta:
+		ordering=['-created_time']
+			

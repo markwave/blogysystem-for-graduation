@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{% block blog_list_title %}博客列表（一共有{{ blogs|length }}篇博客）{% endblock %}</div>
+                    <div class="panel-heading">{% block blog_list_title %}博客列表（一共有{{ blog.paginator.count }}篇博客）{% endblock %}</div>
                     <div class="panel-body">
                         {% for article in blogs %}
                             <div class="blog">
@@ -32,6 +32,33 @@
                             </div>
                         {% endfor %}
                     </div>
+                </div>
+                <div>
+                   
+                      <ul class="pagination">
+                        <li>
+                            {%if blog.has_previous%}<a href="?page={{blog.previous_page_number}}" aria-label="Previous"><span aria-hideden="ture">&laquo;</span></a>
+                            {%else%}<span aria-hidden="true">&laquo;</span>
+                            {%endif%} 
+                        </li>
+                            {% for page_num in blog.paginator.page_range %}
+                                {%if page_num == blog.number %}
+                                    <li class="active"><span>{{page_num}}</span></li>
+                                {%else%}
+                                 <li><a href="?page={{page_num}}">{{page_num}}</a></li>
+                                {%endif%}
+                                
+                            {%endfor%}    
+                        <li>
+                            {%if blog.has_next%}
+                                <a href="?page={{blog.next_page_number}}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            {%else%}
+                                <span aria-hidden="true">&raquo;</span>
+                            {%endif%}
+                        </li>
+                      </ul>
+                 
                 </div>
             </div>
             <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
