@@ -16,6 +16,9 @@ div.paginator{
     text-align: center;
 }
 
+div.blog-more{
+    margin-bottom: 1em;
+}
 ul.blog-info-description {
     list-style-type: none;
     margin-bottom: 1em;
