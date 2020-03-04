@@ -23,13 +23,14 @@
                 <div class="blog-more">
                     <p>上一篇：
                         {%if previous_blog%}
-                            <a href="{% url 'article_detail' previous_blog.pk %}}" >{{previous_blog.title}}</a>
+                            
+                            <a href="{% url 'article_detail' previous_blog.pk %}" >{{previous_blog.title}}</a>
                         {%else%}没有了
                         {%endif%}
                     </p>
                     <p>下一篇：
                         {%if next_blog%}
-                            <a href="{% url 'article_detail' next_blog.pk %}}" >{{next_blog.title}}</a>
+                            <a href="{% url 'article_detail' next_blog.pk %}" >{{next_blog.title}}</a>
                         {%else%}没有了
                         {%endif%}
                     </p>
