@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
-
+from read_statistics.models import ReadNumExpandMethod
 # Create your models here.
 class BlogType(models.Model):
 	type_name=models.CharField(max_length=15)
@@ -13,7 +13,7 @@ class BlogType(models.Model):
 
 
 
-class blogv1(models.Model):
+class blogv1(models.Model,ReadNumExpandMethod):
 	title=models.CharField(max_length=50)
 	content=RichTextUploadingField()
 	created_time=models.DateTimeField(auto_now_add=True)
