@@ -1,3 +1,4 @@
+
 from django.shortcuts import render,get_object_or_404,render_to_response
 from django.http import HttpResponse,Http404
 from .models import blogv1,BlogType
@@ -47,7 +48,7 @@ def article_detail(request,b_id):
     context['previous_blog']=blogv1.objects.filter(created_time__gt=article.created_time).last()
     context['next_blog']=blogv1.objects.filter(created_time__lt=article.created_time).first()
     
-    response = render_to_response('blog/article_detail.html', context) # 响应
+    response = render(request,'blog/article_detail.html', context) # 响应
     response.set_cookie(read_cookie_key, 'true') # 阅读cookie标记
     return response
 
