@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 from django.db.models import Count
 from django.conf import settings
 from read_statistics.utils import read_statistics_once_read
+from comment.models import Comment
+from django.contrib.contenttypes.models import ContentType
 # Create your views here.
 
 def get_blog_list_common_data(request,articles):
@@ -43,10 +45,13 @@ def article_detail(request,b_id):
 
     article=get_object_or_404(blogv1,pk=b_id)
     read_cookie_key = read_statistics_once_read(request, article)
+    blog_content_type = ContentType.objects.get_for_model(blogv1)
+    comments = Comment.objects.filter(content_type=blog_content_type, object_id=article.pk)
     context={}
     context['article_obj']=article
     context['previous_blog']=blogv1.objects.filter(created_time__gt=article.created_time).last()
     context['next_blog']=blogv1.objects.filter(created_time__lt=article.created_time).first()
+    context['comments'] = comments
     
     response = render(request,'blog/article_detail.html', context) # 响应
     response.set_cookie(read_cookie_key, 'true') # 阅读cookie标记
