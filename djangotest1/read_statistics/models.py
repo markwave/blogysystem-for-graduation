@@ -16,7 +16,7 @@ class ReadNumExpandMethod():
     def get_read_num(self):
         try:
             ct = ContentType.objects.get_for_model(self)
-            readnum = ReadDetail.objects.get(content_type=ct, object_id=self.pk)
+            readnum = ReadNum.objects.get(content_type=ct, object_id=self.pk)
             return readnum.read_num
         except exceptions.ObjectDoesNotExist:
             return 0

@@ -26,7 +26,7 @@ def home(request):
     hot_blogs_for_7_days = cache.get('hot_blogs_for_7_days')
     if hot_blogs_for_7_days is None:
         hot_blogs_for_7_days = get_7_days_hot_blogs()
-        cache.set('hot_blogs_for_7_days', hot_blogs_for_7_days, 3600)
+        cache.set('hot_blogs_for_7_days', hot_blogs_for_7_days, 600)
 
 
     context = {}
