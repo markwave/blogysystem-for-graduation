@@ -8,6 +8,7 @@ from django.conf import settings
 from read_statistics.utils import read_statistics_once_read
 from comment.models import Comment
 from django.contrib.contenttypes.models import ContentType
+from comment.forms import CommentForm 
 # Create your views here.
 
 def get_blog_list_common_data(request,articles):
@@ -52,6 +53,7 @@ def article_detail(request,b_id):
     context['previous_blog']=blogv1.objects.filter(created_time__gt=article.created_time).last()
     context['next_blog']=blogv1.objects.filter(created_time__lt=article.created_time).first()
     context['comments'] = comments
+    context['comment_form'] = CommentForm(initial={'content_type': blog_content_type.model, 'object_id': b_id})
     
     response = render(request,'blog/article_detail.html', context) # 响应
     response.set_cookie(read_cookie_key, 'true') # 阅读cookie标记
