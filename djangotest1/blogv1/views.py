@@ -47,13 +47,13 @@ def article_detail(request,b_id):
     article=get_object_or_404(blogv1,pk=b_id)
     read_cookie_key = read_statistics_once_read(request, article)
     blog_content_type = ContentType.objects.get_for_model(blogv1)
-    comments = Comment.objects.filter(content_type=blog_content_type, object_id=article.pk)
+    comments = Comment.objects.filter(content_type=blog_content_type, object_id=article.pk,parent=None)
     context={}
     context['article_obj']=article
     context['previous_blog']=blogv1.objects.filter(created_time__gt=article.created_time).last()
     context['next_blog']=blogv1.objects.filter(created_time__lt=article.created_time).first()
-    context['comments'] = comments
-    context['comment_form'] = CommentForm(initial={'content_type': blog_content_type.model, 'object_id': b_id})
+    context['comments'] = comments.order_by('-comment_time')
+    context['comment_form'] = CommentForm(initial={'content_type': blog_content_type.model, 'object_id': b_id, 'reply_comment_id': 0})
     
     response = render(request,'blog/article_detail.html', context) # 响应
     response.set_cookie(read_cookie_key, 'true') # 阅读cookie标记
