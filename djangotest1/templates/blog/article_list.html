@@ -6,6 +6,7 @@
 
 {% load staticfiles %}
 {% load comment_tags %}
+{% load likes_tags %}
 {% block header_extends %}
     <link rel="stylesheet" href="{% static 'blog.css' %}">
 {% endblock %}
@@ -25,7 +26,8 @@
                                     <span class="glyphicon glyphicon-tag"></span><a href="{% url 'blogs_with_type' article.blog_type.pk %}">{{ article.blog_type }}</a>
                                     <span class="glyphicon glyphicon-time"></span>{{ article.created_time|date:"Y-m-d" }}&nbsp;&nbsp;
                                     ÔÄ¶Á({{ article.get_read_num }})&nbsp;&nbsp;
-                                    ÆÀÂÛ({% get_comment_count article %})
+                                    ÆÀÂÛ({% get_comment_count article %})&nbsp;&nbsp;
+                                    µãÔŞ({% get_like_count article %})
                                 </p>
                                 <p>{{ article.content|striptags|truncatechars:30 }}</p>
                             </div>
