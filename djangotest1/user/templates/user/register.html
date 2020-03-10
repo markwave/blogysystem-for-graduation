@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    æˆ‘çš„ç½‘ç«™|æ³¨å†Œ
+    ÎÒµÄÍøÕ¾|×¢²á
 {% endblock %}
 
 {% block nav_home_active %}active{% endblock %}
@@ -11,9 +11,10 @@
     <div class="containter">
         <div class="row">
             <div class="col-xs-4 col-xs-offset-4">
+                {% if not user.is_authenticated %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">æ³¨å†Œ</h3>
+                        <h3 class="panel-title">×¢²á</h3>
                     </div>
                     <div class="panel-body">
                         <form action="" method="POST">
@@ -24,10 +25,16 @@
                                 <p class="text-danger">{{ field.errors.as_text }}</p>
                             {% endfor %}
                             <span class="pull-left text-danger">{{ reg_form.non_field_errors }}</span>
-                            <input type="submit" value="æ³¨å†Œ" class="btn btn-primary pull-right">
+                            <input type="submit" value="×¢²á" class="btn btn-primary pull-right">
                         </form>
                     </div>
-                </div>                
+                </div> 
+                {% else %}
+                    <span>ÒÑµÇÂ¼£¬Ìø×ªµ½Ê×Ò³...</span>
+                    <script type="text/javascript">
+                        window.location.href = '/';
+                    </script>
+                {% endif %}                   
             </div>
         </div>
     </div>    
