@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'likes',
     'user',
     'notifications',
+    'my_notifications'
 ]
 
 MIDDLEWARE = [
@@ -187,3 +188,8 @@ EMAIL_HOST_USER = '468204510@qq.com'
 EMAIL_HOST_PASSWORD = 'lzkswrjcarfibgfd'  # 授权码
 EMAIL_SUBJECT_PREFIX = '[刘俊的个人博客system] '
 EMAIL_USE_TLS = True  # 与SMTP服务器通信时，是否启动TLS链接(安全链接)
+
+# django-notifications-hq设置
+DJANGO_NOTIFICATIONS_CONFIG = { 
+    'USE_JSONFIELD': True,
+}

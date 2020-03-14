@@ -1,4 +1,5 @@
 {% load staticfiles %} 
+{% load notifications_tags %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'notifications/notify.js' %}"></script>
     {% block header_extends %}{% endblock %}
 </head>
 <body>
@@ -52,15 +54,16 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                                 {% if user.has_nickname %}
-                                    {{ user.username }}({{ user.get_nickname }}) 
+                                    你好{{ user.username }}({{ user.get_nickname }})
+                                    <span class="badge unread-count live_notify_badge">{% if unread_count > 0 %}{{ unread_count }}{% endif %}</span> 
                                 {% else %}
-                                    {{ user.username }}
+                                    你好{{ user.username }}<span class="badge unread-count live_notify_badge">{% if unread_count > 0 %}{{ unread_count }}{% endif %}</span>
                                 {% endif %}
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'user_info' %}">个人资料</a></li>
-                                <li><a href="{% url 'my_notifications' %}">我的消息</a></li>
+                                <li><a href="{% url 'my_notifications' %}">我的消息<span class="badge unread-count live_notify_badge">{% if unread_count > 0 %}{{ unread_count }}{% endif %}</span></a></li>
                                 <li><a href="{% url 'change_password' %}">修改密码</a></li>
                                 {% if user.is_staff or user.is_superuser %}
                                     <li><a href="{% url 'admin:index' %}">后台管理</a></li>
@@ -119,7 +122,16 @@
                 }
             });
         });
+        //自定义实时获取未读消息
+        function my_special_notification_callback(data){
+            unread_count = data['unread_count'];
+            if (unread_count == 0) {
+                unread_count = '';
+            }
+            $('.live_notify_badge').text(unread_count);
+        }
     </script>
+    {% register_notify_callbacks callbacks='my_special_notification_callback' %}
     {% block script_extends%}{% endblock %}
 </body>
 </html>

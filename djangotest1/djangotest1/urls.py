@@ -27,8 +27,8 @@ urlpatterns = [
     path('likes/', include('likes.urls')),
     path('comment/', include('comment.urls')),
     path('user/',include('user.urls')),
-    
-    path('my_notifications/', views.my_notifications, name='my_notifications'),
+    path('notifications/', include('notifications.urls', namespace='notifications')),
+    path('my_notifications/', include('my_notifications.urls')),
     ]
     
 
