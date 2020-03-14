@@ -23,7 +23,7 @@ def update_comment(request):
             comment.parent = parent
             comment.reply_to = parent.user
         comment.save()
-        comment.send_mail()
+        
 
         # 返回数据
         data['status'] = 'SUCCESS'

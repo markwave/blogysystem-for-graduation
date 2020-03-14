@@ -41,3 +41,7 @@ def home(request):
     context['hot_blogs_for_7_days'] = hot_blogs_for_7_days
     return render(request,'blog/home.html', context)
 
+def my_notifications(request):
+    context = {}
+    return render(request, 'my_notifications.html', context)
+    
