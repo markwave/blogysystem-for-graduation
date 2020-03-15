@@ -64,9 +64,21 @@ def search(request):
     paginator = Paginator(search_blogs, 10)
     page_num = request.GET.get('page', 1) # 获取url的页面参数（GET请求）
     page_of_blogs = paginator.get_page(page_num)
+    currentr_page_num=page_of_blogs.number#获取当前页码
+    page_range=list(range(max(currentr_page_num-2,1),currentr_page_num))+\
+                list(range(currentr_page_num,min(currentr_page_num+2,paginator.num_pages)+1))
+    if page_range[0]-1>=2:
+        page_range.insert(0,'...')
+    if paginator.num_pages-page_range[-1]>=2:
+        page_range.append('...')
+    if page_range[0]!=1:
+        page_range.insert(0,1)
+    if page_range[-1]!=paginator.num_pages:
+        page_range.append(paginator.num_pages)
 
     context = {}
     context['search_words'] = search_words
+    context['page_range']=page_range
     context['search_blogs_count'] = search_blogs.count()
     context['page_of_blogs'] = page_of_blogs
     return render(request, 'search.html', context)  

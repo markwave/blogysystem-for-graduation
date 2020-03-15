@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block header_extends %}
+<link rel="stylesheet" href="{% static 'blog.css' %}">
 {% endblock %}
 
 {% block nav_home_active %}active{% endblock %}
@@ -31,20 +32,42 @@
                 {% endif %}
             </div>
         </div>
-        <div class="row" style="display: flex; justify-content: center;">
-            {% if page_of_blogs.has_previous %}
-                <a class="btn btn-default"
-                   href="{% url 'search' %}?wd={{ search_words }}&page={{ page_of_blogs.previous_page_number }}">
-                    上一页
-                </a>
-            {% endif %}
-
-            {% if page_of_blogs.has_next %}
-            <a class="btn btn-default"
-               href="{% url 'search' %}?wd={{ search_words }}&page={{ page_of_blogs.next_page_number }}">
-                下一页
-            </a>
-            {% endif %}
-        </div>
+        
+        <div class="paginator">
+                   
+                      <ul class="pagination">
+                        <li>
+                            {%if page_of_blogs.has_previous%}<a href="{% url 'search' %}?wd={{ search_words }}&page={{ page_of_blogs.previous_page_number }}" aria-label="Previous"><span aria-hideden="ture">&laquo;</span></a>
+                            {%else%}<span aria-hidden="true">&laquo;</span>
+                            {%endif%} 
+                        </li>
+                            {% for page_num in page_range %}
+                                {%if page_num == page_of_blogs.number %}
+                                    <li class="active"><span>{{page_num}}</span></li>
+                                {%else%}
+                                    {%if page_num == '...'%}
+                                        <li><span>{{page_num}}</span></li>
+                                    {%else%}  <li><a href="{% url 'search' %}?wd={{ search_words }}&page={{page_num}}">{{page_num}}</a></li>
+                                    {%endif%}
+                                 
+                                    
+                                {%endif%}
+                                
+                            {%endfor%}    
+                        <li>
+                            {%if page_of_blogs.has_next%}
+                                <a href="{% url 'search' %}?wd={{ search_words }}&page={{ page_of_blogs.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            {%else%}
+                                <span aria-hidden="true">&raquo;</span>
+                            {%endif%}
+                        </li>
+                      </ul>
+                      <p>
+                          共有{{ page_of_blogs.paginator.count }}篇博客,
+                          当前第{{page_of_blogs.number}}页，
+                          共{{page_of_blogs.paginator.num_pages}}页
+                      </p>  
+                </div>
     </div>
 {% endblock %}
