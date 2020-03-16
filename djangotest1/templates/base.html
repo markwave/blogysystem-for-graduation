@@ -14,6 +14,8 @@
     <script type="text/javascript" src="{% static 'notifications/notify.js' %}"></script>
     {% block header_extends %}{% endblock %}
 </head>
+
+    
 <body>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -88,6 +90,42 @@
     </div>
 
     {% block content %}{% endblock %}
+    <!--打赏-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/myRewards.css' %}">
+    <script>
+        window.tctipConfig = {
+            //最上面的文字
+            headText: "欢迎各位浏览学习 ^_^",
+            //侧边栏文本
+            siderText: "公告 & 交流支持",
+            //侧边栏文本高度调整
+            siderTextTop: "-72px",
+            //侧边栏背景颜色
+            siderBgcolor: "#323d45",
+            //整个侧边栏的高度设置
+            siderTop:"118px",
+            //底部文字
+            buttomText:"了解更多",
+            //底部文字链接
+            buttomLink:"https://www.baidu.com",
+            //显示列表
+            list:{
+                notice: {name:"公告栏", className:"myR-on",
+                         icon: "/static/img/icon/tip.png",  
+                         text: "获取公告中..."
+                        },
+                alipay: {name:"支付宝", desc: "用支付宝给“仕航”打赏", 
+                         icon: "/static/img/icon/alipay.png", 
+                         qrimg: "/static/img/qr/starbucks.jpg"
+                        },
+                weixin: {name:"微信", desc: "用微信给“仕航”打赏", 
+                         icon: "/static/img/icon/weixin.png",
+                         qrimg: "/static/img/qr/weixin.jpg"
+                        }    
+            }
+        };
+    </script>
+    <script src="/static/js/tctip.min.js"></script>
  <!-- Modal -->
     <div class="modal fade" id="login_modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
@@ -147,6 +185,25 @@
             }
             $('.live_notify_badge').text(unread_count);
         }
+        $.ajax({
+    type:"GET",
+    url:"{% url 'get_notice' %}",
+    cache:false,
+    dataType:'json',
+    success:function(data){
+        var notice;
+        if(data['code']=='0'){
+            notice = data['notice'];
+        }else{
+            notice='暂无公告';
+        };
+        
+        //设置当前公告(当前显示)
+        $('.myRewards-text').html(notice);
+        //设置公告数据(切换的时候显示)
+        tctipConfig.list.notice.text=notice;
+    }
+    });
     </script>
     {% register_notify_callbacks callbacks='my_special_notification_callback' %}
     {% block script_extends%}{% endblock %}

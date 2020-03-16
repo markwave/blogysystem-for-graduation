@@ -19,6 +19,7 @@ from .views import home
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('notifications/', include('notifications.urls', namespace='notifications')),
     path('my_notifications/', include('my_notifications.urls')),
     path('search/', views.search, name="search"),
+    path('get_notice/',include('notice.urls')),
     ]
     
 
