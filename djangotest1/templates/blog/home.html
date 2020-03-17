@@ -7,11 +7,18 @@
 
 {%block header_extends%}
 	<link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="stylesheet" href="{% static 'all.css' %}">
     <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
 {%endblock%}
 {% block nav_home_active %}active{% endblock %}
 {%block content%}
-
+<div class="header-banner">
+        <div class="container">
+            <h1>J.Liu Blog</h1>
+            <p>只为混毕设，发表<span class="hidden-xs">个人原创</span>高质量的技术博客</p>
+            <p>刘俊的博客</p>
+        </div>
+    </div>
 <h3 class="home-content">欢迎来到我的博客，随便看</h3>
 
     <!-- 图表容器 DOM -->
@@ -79,7 +86,7 @@
         // 图表初始化函数
         var chart = Highcharts.chart('container', options);
     </script>
-
+    
 
 {%endblock%}
 

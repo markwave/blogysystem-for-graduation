@@ -9,10 +9,18 @@
 {% load likes_tags %}
 {% block header_extends %}
     <link rel="stylesheet" href="{% static 'blog.css' %}">
+    <link rel="stylesheet" href="{% static 'all.css' %}">
 {% endblock %}
 
 {# 页面内容 #}
 {% block content %}
+<div class="header-banner">
+        <div class="container">
+            <h1>博客列表</h1>
+            <p>只为混毕设，发表<span class="hidden-xs">个人原创</span>高质量的技术博客</p>
+            <p>刘俊的博客</p>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">

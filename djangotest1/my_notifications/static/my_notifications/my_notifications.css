@@ -9,3 +9,17 @@
 .notifications {
     margin-top: 1em;
 }
+body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6,p,a,div { 
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+/*博文列表*/
+.blog-item{ clear:both; border-bottom: 1px solid #ddd; padding: 1.5em 1em 0.8em 1.5em;  overflow: hidden;}
+.blog-title{ margin-bottom: 0.5em; font-size: 115%; font-weight: bold;}
+.blog_descipt{ color: #777; font-size: small;}
+.blog-tags{ font-size: 70%; color: #75878a; margin-top: 0.5em; display: inline-block; border-top: 1px #ddd solid;}
+.blog-tags li{  float: left;  padding-top: 0.5em; margin-right: 1em;}
+li{
+
+            list-style-type:none;
+}
+.glyphicon{    margin-right: 8px;}

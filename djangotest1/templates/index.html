@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<head>
+<meta charset="UTF-8">
+<title> 首页加载中</title>
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<script type="text/javascript">
+    var num=8;
+    function redirect(){
+        num--;
+        document.getElementById("num").innerHTML=num;
+        if(num<0){
+            document.getElementById("num").innerHTML=0;
+            location.href="{% url 'home' %}";
+            }
+        }
+    setInterval("redirect()", 1000);
+</script>
+
+<script src="{% static 'prefixfree.min.js' %}"></script>
+
+</head>
+
+<body onLoad="redirect();">
+<div class="whole">
+    <img src="{% static 'back.jpg' %}"/>
+    <div class="mask"></div>
+</div>
+<div class="b">
+        
+        <p>
+            <br>
+            欢迎来到J.Liu的博客<br>
+            <span id="num"></span>秒后加载完成
+        </p>
+    </div>
+
+
+<div id="loader">
+	<progress id='p' value='0' max='100'></progress>
+	<output for='p'></output>
+</div>
+
+<script src="{% static 'script.js' %}"></script>
+
+</body>
+</html>

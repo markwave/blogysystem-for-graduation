@@ -36,7 +36,7 @@
                         <a href="{% url 'article_list' %}">²©¿Í</a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right ">
                     {% if not user.is_authenticated %}
                         <li>
                             {% if request.GET.from %}
@@ -75,7 +75,7 @@
                         </li>
                     {% endif %}
                     <li>
-                        <form class="navbar-form search-form" action="{% url 'search' %}">
+                        <form class="navbar-form search-form" style="margin-right: -2em;action="{% url 'search' %}">
                             <div class="form-group">
                                 <input type="text" name="wd" class="form-control" placeholder="Search">
                             </div>
