@@ -42,3 +42,13 @@ div.website-info p {
 .unread-count {
     background-color: #d9534f!important;
 }
+.nav .glyphicon {
+    font-size: small;
+}
+li.active{
+    color:#0cbaef;
+}
+.navbar-default .navbar-nav>.active>a {
+    color: #1a94d0!important;
+    background-color: #e7e7e7!important;
+}

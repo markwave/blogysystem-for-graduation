@@ -2,10 +2,10 @@ import datetime
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
-from django.db.models import Sum, Q
+from django.db.models import Sum, Q,Count
 from django.core.cache import cache
 from read_statistics.utils import get_seven_days_read_data, get_today_hot_data, get_yesterday_hot_data
-from blogv1.models import blogv1
+from blogv1.models import blogv1,BlogType
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -35,10 +35,12 @@ def home(request):
 
 
     context = {}
+    context['blognum']=blogv1.objects.filter(is_deleted=False).count()
     context['dates'] = dates
     context['read_nums'] = read_nums
     context['today_hot_data'] = get_today_hot_data(blog_content_type)
     context['yesterday_hot_data'] = get_yesterday_hot_data(blog_content_type)
+    context['blog_types']=BlogType.objects.annotate(blog_count=Count('blogv1'))
     context['hot_blogs_for_7_days'] = hot_blogs_for_7_days
     return render(request,'blog/home.html', context)
 

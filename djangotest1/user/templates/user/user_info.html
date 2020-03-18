@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
+{% load comment_tags %}
 {% block title %}个人资料{% endblock %}
-{% block nav_home_active %}active{% endblock %}
+{% block nav_home_active %}{% endblock %}
 {% block content %}
     <div class="container">
         <div class="row">
@@ -14,6 +15,45 @@
                         <li>上一次登录的时间：{{ user.last_login|date:"Y-m-d H:i:s" }}</li>
                         <li><a href="{% url 'change_password' %}">修改密码</a></li>
                     </ul>
+                    {% get_comment_user user as comments %}
+                    <p>你评论了{{comments.commentcount}}次</p>
+                    <p>你收到回复{{comments.replyedcount}}次</p>
+                    <p>你回复{{comments.replycount}}次</p>
+                    <div class="comment-area">
+                    <h3 class="comment-area-title">评论列表</h3>
+                    <div id="comment_list">
+                        
+                        {% for comment in comments.usercomment %}
+                            <div id="root_{{ comment.pk }}" class="comment">
+                                <span>{{ comment.user.get_nickname_or_username }}</span>
+                                <span>({{ comment.comment_time|date:"Y-m-d H:i:s" }})：</span>
+                                <div id="comment_{{ comment.pk }}">
+                                    {{ comment.text|safe }}
+                                </div>
+                              
+                                
+
+                                
+                                {% for reply in comment.root_comment.all %}
+                                    
+                                    <div class="reply">
+                                        <span>{{ reply.user.get_nickname_or_username }}</span>
+                                        <span>({{ reply.comment_time|date:"Y-m-d H:i:s" }})</span>
+                                        <span>回复</span>
+                                        <span>{{ reply.reply_to.get_nickname_or_username }}：</span>
+                                        <div id="comment_{{ reply.pk }}">
+                                            {{ reply.text|safe }}
+                                        </div>
+                                      
+                                    </div>                                    
+                                {% endfor %}
+                                {}
+                            </div>
+                        {% empty %}
+                            <span id="no_comment">暂无评论</span>
+                        {% endfor %}
+                    </div>                    
+                </div>
                 {% else %}
                     <span>未登录，跳转到首页...</span>
                     <script type="text/javascript">

@@ -13,53 +13,89 @@
 {% block nav_home_active %}active{% endblock %}
 {%block content%}
 <div class="header-banner">
-        <div class="container">
+        <div class="container" >
             <h1>J.Liu Blog</h1>
             <p>只为混毕设，发表<span class="hidden-xs">个人原创</span>高质量的技术博客</p>
             <p>刘俊的博客</p>
         </div>
-    </div>
-<h3 class="home-content">欢迎来到我的博客，随便看</h3>
+</div>
 
+    <div class="container">
+    <div class="content-item">
+         <h3 class="content-item-title">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>博客</span>
+            <span class="content-more">
+                共{{blognum}}篇博客 
+                <a href="{%url 'article_list'%}">more&gt;</a>
+            </span>
+        </h3>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="home-block">
+                    <h4 class="home-block-title">博客分类</h4>
+                        <ul class="list">
+                            {% for blog_type in blog_types %}
+                                <li><a href="{% url 'blogs_with_type' blog_type.pk %}">{{ blog_type.type_name }}</a><span> ({{blog_type.blog_count}})</span></li>
+                            {% empty %}
+                                <li>暂无分类</li>
+                            {% endfor %}
+                        </ul>    
+                    </div>
+                        
+                    </div>
+                     <div class="col-sm-8">
+                        <div class="home-block" style="min-height: 380px;">
+                        <div id="container" ></div>
+                        </div>
+                        </div>
+                    </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="home-block">
+                    <h4 class="home-block-title">今日热门博客</h4>
+                        <ul class="list">
+                            {% for hot_data in today_hot_data %}
+                            <li><span class="glyphicon glyphicon-fire" style=" color: #dc1717"></span><a href="{% url 'article_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a> 阅读数({{ hot_data.read_num }})</li>
+                            {% empty %}
+                            <li>今天暂时没有热门博客</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    </div>
+            <div class="col-sm-4">
+                <div class="home-block">
+                    <h4 class="home-block-title">昨日热门博客</h4>
+                        <ul class="list">
+                            {% for hot_data in yesterday_hot_data %}
+                            <li><span class="glyphicon glyphicon-fire" style=" color: #dc1717"></span><a href="{% url 'article_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a> 阅读数({{ hot_data.read_num }})</li>
+                            {% empty %}
+                            <li>昨天暂时没有热门博客</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    </div>
+            <div class="col-sm-4">
+                <div class="home-block">
+                    <h4 class="home-block-title">一周热门博客</h4>
+                        <ul class="list">
+                            {% for hot_blog in hot_blogs_for_7_days %}
+                            <li><span class="glyphicon glyphicon-fire" style=" color: #dc1717"></span><a href="{% url 'article_detail' hot_blog.id %}">{{ hot_blog.title }}</a> 阅读数({{ hot_blog.read_num_sum }})</li>            
+                            {% empty %}
+                            <li>最近暂时没有热门博客</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    </div>                                    
     <!-- 图表容器 DOM -->
-    <div id="container"></div>
-    <div class="hot-data">
-        <h3>今天热门博客</h3>
-        <ul>
-            {% for hot_data in today_hot_data %}
-                <li><a href="{% url 'article_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>            
-            {% empty %}
-                <li>今天暂时没有热门博客</li>
-            {% endfor %}
-        </ul>
-    </div>
-    
 
-    <div class="hot-data">
-        <h3>昨天热门博客</h3>
-        <ul>
-            {% for hot_data in yesterday_hot_data %}
-                <li><a href="{% url 'article_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>            
-            {% empty %}
-                <li>昨天暂时没有热门博客</li>
-            {% endfor %}
-        </ul>
     </div>
-    <div class="hot-data">
-        <h3>7天热门博客</h3>
-        <ul>
-            {% for hot_blog in hot_blogs_for_7_days %}
-                <li><a href="{% url 'article_detail' hot_blog.id %}">{{ hot_blog.title }}</a>({{ hot_blog.read_num_sum }})</li>            
-            {% empty %}
-                <li>昨天暂时没有热门博客</li>
-            {% endfor %}
-        </ul>
     </div>
     <script>
         // 图表配置
         var options = {
             chart: { type: 'line' },
-            title: { text: null },
+            title: { text: "阅读量趋势图" },
             xAxis: {
                 categories: {{ dates|safe }},   // x 轴分类
                 tickmarkPlacement: 'on',

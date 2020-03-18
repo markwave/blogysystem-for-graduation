@@ -17,6 +17,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-10 col-xs-offset-1">
+                <div class="panel panel-default">
+                <div class="panel-heading">
                 <h3>{{ article_obj.title }}</h3>
                 <ul class="blog-info-description">
                     <li>作者：{{ article_obj.author }}</li>
@@ -25,7 +27,10 @@
                     <li>阅读({{article_obj.get_read_num}})</li>
                     <li>评论({% get_comment_count article_obj %})</li>
                 </ul>
-                <div class="blog-content">{{ article_obj.content|safe }}</div>
+                </div>
+                <div class="panel-body">
+                <div class="blog-content">
+                {{ article_obj.content|safe }}</div>
                 <div class="like" onclick="likeChange(this, '{% get_content_type article_obj %}', {{ article_obj.pk }})">
                     <span class="glyphicon glyphicon-thumbs-up {% get_like_status article_obj %}"></span>
                     <span class="liked-num">{% get_like_count article_obj %}</span>
@@ -47,9 +52,10 @@
                     </p>
                 </div>
             </div>
+
         </div>
-        <div class="row">
-            <div class="col-xs-10 col-xs-offset-1">
+        
+            
                 <div class="comment-area">
                     <h3 class="comment-area-title">提交评论</h3>
                     {% if user.is_authenticated %}
@@ -114,8 +120,11 @@
                         {% endfor %}
                     </div>                    
                 </div>
-            </div>
-        </div>
+                </div>
+                </div>
+                
+            
+        
         
     </div>    
 {% endblock %}

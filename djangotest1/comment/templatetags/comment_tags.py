@@ -23,6 +23,28 @@ def get_comment_form(obj):
 @register.simple_tag
 def get_comment_list(obj):
     content_type = ContentType.objects.get_for_model(obj)
+    
     comments = Comment.objects.filter(content_type=content_type, object_id=obj.pk, parent=None)
+    
     return comments.order_by('-comment_time')
+@register.simple_tag
+def get_comment_user(obj):
+    
+    
+    comments = Comment.objects.filter(user=obj, parent=None)
+    replycomments=Comment.objects.filter(user=obj).exclude(parent=None)
+    replyedcount=0
+    for comment in comments:
+        lll=comment.root_comment.all()
+        for replyed in lll:
+            replyedcount=replyedcount+1
+
+    
+    data={}
+    data['replycount']=replycomments.count()
+    data['commentcount']=comments.count()
+    data['replyedcount']=replyedcount
+    data['usercomment']=comments.order_by('-comment_time')
+    return data
+    
     

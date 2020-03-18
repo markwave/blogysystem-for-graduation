@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.db.models import Count
 from django.conf import settings
 from read_statistics.utils import read_statistics_once_read
-
+import random
 from django.contrib.contenttypes.models import ContentType
 
 # Create your views here.
@@ -34,12 +34,16 @@ def get_blog_list_common_data(request,articles):
         blog_count=blogv1.objects.filter(created_time__year=blog_date.year,created_time__month=blog_date.month).count()
         blog_dates_dict[blog_date]=blog_count
 
+#随机推荐模块
+    rand_count = 10
+    randomblogs = random.sample(list(blogv1.objects.all()), rand_count)
 
     context={}
     context['blogs']=page_of_blogs.object_list
     context['blog']=page_of_blogs
     context['page_range']=page_range
     context['blog_dates']=blog_dates_dict
+    context['rand_blogs']=randomblogs
     context['blog_types']=BlogType.objects.annotate(blog_count=Count('blogv1'))
     return context    
 def article_detail(request,b_id):
@@ -61,6 +65,7 @@ def article_detail(request,b_id):
 def article_list(request):
     articles=blogv1.objects.filter(is_deleted=False)
     context=get_blog_list_common_data(request,articles)
+
     return render(request,"blog/article_list.html",context)
 
 	

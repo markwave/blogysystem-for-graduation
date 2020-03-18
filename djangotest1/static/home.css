@@ -16,3 +16,21 @@ div.hot-data {
     text-align: center;
     margin-top: 2em;
 }
+.content-more {
+    font-size: 0.6em;
+    margin-left: 1em;
+}
+.home-block-title {
+    border-bottom: 1px #ccc solid;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.home-block {
+    /* border: 1px #ccc solid; */
+    border-radius: 6px;
+    padding: 16px 1em 5px 1.5em;
+    margin-bottom: 1em;
+}
+
+.glyphicon glyphicon-fire{    color: #ff0000;
+}
