@@ -1,0 +1,1 @@
+default_app_config='blogv1.apps.Blogv1Config'
