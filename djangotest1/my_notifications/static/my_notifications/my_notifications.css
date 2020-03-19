@@ -23,3 +23,5 @@ li{
             list-style-type:none;
 }
 .glyphicon{    margin-right: 8px;}
+
+.press :hover{ background-color: #eee;}

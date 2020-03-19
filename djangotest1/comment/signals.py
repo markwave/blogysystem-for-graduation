@@ -18,7 +18,7 @@ def send_notification(sender, instance, **kwargs):
         recipient = instance.content_object.get_user()
         if instance.content_type.model == 'blogv1':
             blog = instance.content_object
-            verb = '{0} 评论了你的《{1}》'.format(instance.user.get_nickname_or_username(), blog.title)
+            verb = '{0} 评论了你的文章     {1}'.format(instance.user.get_nickname_or_username(), blog.title)
         else:
             raise Exception('unkown comment object type')
     else:

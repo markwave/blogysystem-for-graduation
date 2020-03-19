@@ -45,6 +45,7 @@ def get_comment_user(obj):
     data['commentcount']=comments.count()
     data['replyedcount']=replyedcount
     data['usercomment']=comments.order_by('-comment_time')
+    data['replycomments']=replycomments.order_by('-comment_time')
     return data
     
     

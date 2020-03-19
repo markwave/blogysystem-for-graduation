@@ -1,6 +1,6 @@
 const _PRG = document.getElementById('p'),
 _OUT = document.querySelector('[for=p]'),
-K = 2,TMAX = K * _PRG.max;
+K = 1,TMAX = K * _PRG.max;
 
 function load(t = 0) {
   if (t <= TMAX) {
