@@ -25,7 +25,7 @@ SECRET_KEY = '89b=+92#qxefa4w(&bp#4(^t7ahen=4yo=w#)*+di_)tdkbc&q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 FILE_CHARSET='gb18030'
 DEFAULT_CHARSET='utf-8'
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'notifications',
     'my_notifications',
     'notice',
+    'oauth',
 ]
 
 MIDDLEWARE = [

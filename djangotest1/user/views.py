@@ -34,6 +34,7 @@ def login(request):
 
     context = {}
     context['login_form'] = login_form
+    context['from']=request.GET.get('from') 
     return render(request, 'user/login.html', context)
 
 def register(request):

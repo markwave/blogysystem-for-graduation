@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-xs-4 col-xs-offset-4">
+            <div class="col-xs-5 col-xs-offset-3">
                 {% if not user.is_authenticated %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -16,12 +16,16 @@
                                 {% csrf_token %}
                                 {% for field in login_form %}
                                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {%if field.id_for_label == 'id_password'%}
+                                        &nbsp;&nbsp;<a href="{% url 'forgot_password' %}" tabindex=-1>(Íü¼ÇÃÜÂë£¿)</a>
+                                    {%endif%}
                                     {{ field }}
                                     <p class="text-danger">{{ field.errors.as_text }}</p>
                                 {% endfor %}
                                 <span class="text-danger">{{ login_form.non_field_errors }}</span>
                                 <div class="clearfix"></div>
-                                <a href="{% url 'forgot_password' %}" class="pull-left">Íü¼ÇÃÜÂë£¿</a>
+                                
+                                <a href="{% url 'oauth_login'  %}?from={{ from }}" title="GithubµÇÂ¼"><img src="/static/img/connect/logo_github.png" width="25px" height="25px" alt="GithubµÇÂ¼">GithubµÇÂ¼</a>
                                 <input type="submit" value="µÇÂ¼" class="btn btn-primary pull-right">
                             </form>
                         </div>
