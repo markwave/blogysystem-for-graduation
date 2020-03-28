@@ -1,14 +1,13 @@
 #coding:utf-8
 from django.db import models
 
-#若不是使用系统的用户认证，可以换成你自己的用户系统
 from django.contrib.auth.models import User 
 
 class OAuth_type(models.Model):
     """OAuth类型"""
     type_name = models.CharField(max_length = 12)
     title = models.CharField(max_length = 12)
-    #图片上传的路径可以修改成自己的
+    
     img = models.FileField(upload_to='static/img/connect') 
 
     #oauth基本设置

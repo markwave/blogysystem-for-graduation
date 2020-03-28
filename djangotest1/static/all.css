@@ -18,7 +18,7 @@ pre{
 .header-banner h1{ font-size: 3em; color: #fff; margin-bottom: 12px;}
 .header-banner p{ font-weight: 300; line-height: 1.4; font-size: 1.5em; color:#B9BFE4; margin: 5px 0;}
 .header-banner .total_num{ display: inline-block; margin-left: 0.5em; font-size: 80%; padding: 0.2em 0.3em 0.1em; background-color: #fff; color: #555; font-weight: bold; border-radius: 4px;}
-
+.bg{ background: url(/static/img/bg.jpg) repeat; }
 @media (min-width: 1200px){
     .header-banner{
         min-height: 300px;

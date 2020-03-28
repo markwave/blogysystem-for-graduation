@@ -8,6 +8,7 @@ urlpatterns = [
     path('type/<int:blog_type_pk>', views.blogs_with_type, name="blogs_with_type"),
     path('<int:b_id>', article_detail, name="article_detail"),
     path('date/<int:year>/<int:month>',blogs_with_date,name="blogs_with_date"),
+    
 
 
 ]

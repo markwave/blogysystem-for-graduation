@@ -27,7 +27,7 @@
                                 </li>
                                 <li>
                                     <span>绑定邮箱：</span>
-                                    <span>{% if user.email %}{{ user.email }}{% else %}未绑定 <a href="{% url 'bind_email' %}?from={{ request.get_full_path }}">绑定邮箱</a>{% endif %}</span>
+                                    <span>{% if user.email %}{{ user.email }}{% else %}未绑定 <a href="{% url 'user_bind_email' %}?from={{ request.get_full_path }}">绑定邮箱</a>{% endif %}</span>
                                 </li>
                                 <li>
                                     <span>上一次登录的时间：</span>
@@ -62,7 +62,7 @@
 
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">近期发言<button type="button" class="btn btn-primary btn-xs" id="btn1"  >显示或隐藏近期发言</button></div>
+                        <div class="panel-heading">近期发言<button type="button" class="btn btn-primary btn-xs" id="btn1"  >显示/隐藏近期发言</button></div>
                         <div class="panel-body" id="yourspeech">
                             <div class="unread_head">
                             <ul class="unread_list">
